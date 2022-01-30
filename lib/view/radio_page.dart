@@ -31,7 +31,11 @@ class RadioView extends StatelessWidget {
         case RadioStatus.failure:
           return const Center(child: Text('Oops something went wrong!'));
         case RadioStatus.success:
-          return Text(state.stations[1].name);
+          return Column(
+            children: [
+              Text(state.stations[5].name),
+            ],
+          );
         default: return const Center(child: CircularProgressIndicator(),);
       }
     });

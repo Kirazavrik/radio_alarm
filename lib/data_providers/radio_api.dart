@@ -8,7 +8,7 @@ class RadioApi {
 
   Future<Stations> fetchStationByCountry(String country) async {
     final response = await http.get(Uri.parse(
-        '$_baseUrl/json/stations/bycountry/$country?order=clickcount'));
+        '$_baseUrl/json/stations/bycountrycodeexact/$country?order=clickcount'));
 
     if (response.statusCode == 200) {
       return Stations.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));

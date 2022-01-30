@@ -17,9 +17,9 @@ class RadioCubit extends Cubit<RadioState> {
   Future<void> fetchStations(BuildContext context) async {
 
     Locale myLocale = Localizations.localeOf(context);
-    print(myLocale);
+    print(myLocale.countryCode);
     try {
-      final stations = await repository.getStationsByCountry('belarus');
+      final stations = await repository.getStationsByCountry(myLocale.countryCode!);
       emit(RadioState.success(stations));
     } on Exception {
       emit(const RadioState.failure());
