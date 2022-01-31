@@ -50,6 +50,23 @@ class RadioView extends StatelessWidget {
                   ],
                 );
               });
+        case RadioStatus.playing:
+          return ListView.builder(
+              itemCount: stations.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    Text(stations[index].name),
+                    ElevatedButton(
+                        onPressed: () {
+                          context
+                              .read<RadioCubit>()
+                              .playStation(stations[index].url);
+                        },
+                        child: Text('Play'))
+                  ],
+                );
+              });
         default:
           return const Center(
             child: CircularProgressIndicator(),

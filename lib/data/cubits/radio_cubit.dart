@@ -32,5 +32,6 @@ class RadioCubit extends Cubit<RadioState> {
 
   void playStation(String url) {
     _player.playStation(url);
+    emit(RadioState.playing(stations));
   }
 }
