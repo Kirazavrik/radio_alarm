@@ -12,6 +12,7 @@ part 'radio_state.dart';
 class RadioCubit extends Cubit<RadioState> {
   final RadioRepository repository;
   final Player _player;
+  late List<Station> stations;
 
   RadioCubit({required this.repository})
       : _player = Player(),
@@ -21,7 +22,7 @@ class RadioCubit extends Cubit<RadioState> {
     Locale myLocale = Localizations.localeOf(context);
     print(myLocale.countryCode);
     try {
-      final stations = await repository
+      stations = await repository
           .getStationsByCountry(myLocale.countryCode ?? myLocale.languageCode);
       emit(RadioState.success(stations));
     } on Exception {
@@ -31,6 +32,5 @@ class RadioCubit extends Cubit<RadioState> {
 
   void playStation(String url) {
     _player.playStation(url);
-    emit(const RadioState.playing());
   }
 }

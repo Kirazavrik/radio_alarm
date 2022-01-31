@@ -11,12 +11,13 @@ class RadioState extends Equatable {
 
   const RadioState.loading() : this._();
 
-  const RadioState.success(List<Station> stations) :
-      this._(status: RadioStatus.success, stations: stations);
+  const RadioState.success(List<Station> stations)
+      : this._(status: RadioStatus.success, stations: stations);
 
   const RadioState.failure() : this._(status: RadioStatus.failure);
 
-  const RadioState.playing() : this._(status: RadioStatus.playing);
+  const RadioState.playing(List<Station> stations)
+      : this._(status: RadioStatus.playing, stations: stations);
 
   @override
   List<Object?> get props => [status, stations];
