@@ -1,6 +1,6 @@
 part of 'radio_cubit.dart';
 
-enum RadioStatus { loading, success, failure }
+enum RadioStatus { loading, success, failure, playing }
 
 class RadioState extends Equatable {
   final RadioStatus status;
@@ -15,6 +15,8 @@ class RadioState extends Equatable {
       this._(status: RadioStatus.success, stations: stations);
 
   const RadioState.failure() : this._(status: RadioStatus.failure);
+
+  const RadioState.playing() : this._(status: RadioStatus.playing);
 
   @override
   List<Object?> get props => [status, stations];
