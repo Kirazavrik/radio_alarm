@@ -7,8 +7,8 @@ class RadioRepository {
   RadioRepository({RadioApi? radioApi})
       : _radioApi = radioApi ?? RadioApi();
 
-  Future<List<Station>> getStationsByCountry(String country) async{
-    final stations = await _radioApi.fetchStationByCountry(country);
+  Future<List<Station>> getStationsByCountry(String countryCode) async{
+    final stations = await _radioApi.fetchStationByCountry(countryCode);
     List<Station> reversedStations = stations.stations.reversed.toList();
     return reversedStations;
   }
