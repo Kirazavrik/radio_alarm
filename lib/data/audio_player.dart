@@ -13,9 +13,10 @@ class Player{
 
   void playStation(String url) async{
     await _audioPlayer.setUrl(url);
-    _audioPlayer.pause();
     _audioPlayer.play();
   }
 
-
+  void pauseStation() async {
+    _audioPlayer.pause();
+  }
 }

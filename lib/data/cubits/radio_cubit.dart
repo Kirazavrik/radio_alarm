@@ -12,26 +12,30 @@ part 'radio_state.dart';
 class RadioCubit extends Cubit<RadioState> {
   final RadioRepository repository;
   final Player _player;
-  late List<Station> stations;
 
   RadioCubit({required this.repository})
       : _player = Player(),
-        super(const RadioState.loading());
+        super(const RadioState());
 
   Future<void> fetchStations(BuildContext context) async {
     Locale myLocale = Localizations.localeOf(context);
     print(myLocale.countryCode);
     try {
-      stations = await repository
+      final stations = await repository
           .getStationsByCountry(myLocale.countryCode ?? myLocale.languageCode);
-      emit(RadioState.success(stations));
+      emit(state.copyWith(status: RadioStatus.success, stations: stations));
     } on Exception {
-      emit(const RadioState.failure());
+      emit(state.copyWith(status: RadioStatus.failure));
     }
   }
 
   void playStation(String url) {
     _player.playStation(url);
-    emit(RadioState.playing(stations));
+    emit(state.copyWith(status: RadioStatus.playing));
+  }
+
+  void pauseStation() {
+    _player.pauseStation();
+    emit(state.copyWith(status: RadioStatus.paused));
   }
 }

@@ -37,6 +37,8 @@ class RadioView extends StatelessWidget {
           return stationsListView(context, stations);
         case RadioStatus.playing:
           return stationsListView(context, stations);
+        case RadioStatus.paused:
+          return stationsListView(context, stations);
         default:
           return const Center(
             child: CircularProgressIndicator(),
@@ -54,11 +56,14 @@ class RadioView extends StatelessWidget {
               Text(stations[index].name),
               ElevatedButton(
                   onPressed: () {
-                    context
-                        .read<RadioCubit>()
-                        .playStation(stations[index].url);
+                    context.read<RadioCubit>().playStation(stations[index].url);
                   },
-                  child: Text('Play'))
+                  child: Text('Play')),
+              ElevatedButton(
+                  onPressed: () {
+                    context.read<RadioCubit>().pauseStation();
+                  },
+                  child: Text('stop'))
             ],
           );
         });
