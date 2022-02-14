@@ -16,7 +16,7 @@ class Player{
     _audioPlayer.play();
   }
 
-  void pauseStation() async {
+  void pauseStation( ) async {
     _audioPlayer.pause();
   }
 }

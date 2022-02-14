@@ -24,7 +24,6 @@ class RadioPage extends StatelessWidget {
 
 class RadioView extends StatelessWidget {
   RadioView({Key? key}) : super(key: key);
-  bool playing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +55,15 @@ class RadioView extends StatelessWidget {
               Text(stations[index].name),
               ElevatedButton(
                   onPressed: () {
-                    context.read<RadioCubit>().playStation(stations[index].url);
+                    if (stations[index].playing == true) {
+                      context.read<RadioCubit>().pauseStation(stations[index]);
+                      stations[index].playing = false;
+                    } else {
+                      context.read<RadioCubit>().playStation(stations[index]);
+                      stations[index].playing = true;
+                    }
                   },
                   child: Text('Play')),
-              ElevatedButton(
-                  onPressed: () {
-                    context.read<RadioCubit>().pauseStation();
-                  },
-                  child: Text('stop'))
             ],
           );
         });

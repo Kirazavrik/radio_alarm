@@ -5,8 +5,9 @@ class Station extends Equatable {
   final String name;
   final String url;
   final String favicon;
+  bool playing = false;
 
-  const Station(
+  Station(
       {required this.name,
       required this.stationUuid,
       required this.favicon,
